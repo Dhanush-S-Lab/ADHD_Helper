@@ -100,7 +100,7 @@ export function FocusTimer() {
       
       <div className="my-auto flex w-full flex-col items-center max-w-md mx-auto">
         {/* Mode Selector */}
-        <div className="relative z-10 mb-12 flex rounded-full bg-dark-surface p-1.5 ring-1 ring-dark-border shadow-sm w-full overflow-x-auto justify-center">
+        <div className="relative z-10 mb-12 flex rounded-full bg-dark-surface p-1.5 ring-1 ring-dark-border shadow-sm max-w-full overflow-x-auto justify-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {(['2', '10', '15', '25'] as TimerMode[]).map((m) => (
             <button
               key={m}
