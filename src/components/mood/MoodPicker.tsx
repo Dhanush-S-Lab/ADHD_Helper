@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
 import { format } from 'date-fns'
 
@@ -20,10 +20,7 @@ export function MoodPicker() {
   const [note, setNote] = useState(todayLog?.note || '')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const supabase = createClient()
 
   const handleSubmit = async () => {
     if (!selectedMood) return

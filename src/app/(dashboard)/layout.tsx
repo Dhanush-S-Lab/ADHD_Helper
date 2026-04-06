@@ -6,7 +6,7 @@ import { TopBar } from '@/components/layout/TopBar'
 import { MobileNav } from '@/components/layout/MobileNav'
 import { LevelUpModal } from '@/components/rewards/LevelUpModal'
 import { Chatbot } from '@/components/ai/Chatbot'
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/client'
 import { useUserStore } from '@/store/userStore'
 import { useTaskStore } from '@/store/taskStore'
 import { useMoodStore } from '@/store/moodStore'
@@ -23,10 +23,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     const loadUserData = async () => {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      )
+      const supabase = createClient()
 
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return

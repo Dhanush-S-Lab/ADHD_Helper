@@ -12,7 +12,7 @@ import { useTaskStore } from '@/store/taskStore'
 import { useUserStore } from '@/store/userStore'
 import { XP_REWARDS } from '@/types'
 import { Button } from '@/components/ui/Button'
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/client'
 import { useSoundEffect } from '@/hooks/useSoundEffect'
 
 export function FocusTimer() {
@@ -24,10 +24,7 @@ export function FocusTimer() {
   const [showConfetti, setShowConfetti] = useState(false)
   const { width, height } = useWindowSize()
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const supabase = createClient()
 
   // Timer logic
   useEffect(() => {

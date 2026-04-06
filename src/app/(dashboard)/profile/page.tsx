@@ -7,7 +7,7 @@ import { getLevel, getXPToNextLevel, MOOD_EMOJIS, MoodLevel } from '@/types'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Trophy, Zap, Target, LayoutGrid, CheckCircle2, Flame, LogOut } from 'lucide-react'
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 
@@ -35,10 +35,7 @@ export default function ProfilePage() {
   const topMoodLevel = topMood ? parseInt(topMood[0]) as MoodLevel : null
 
   const handleLogout = async () => {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/login')
   }

@@ -7,7 +7,7 @@ import { Sparkles, Plus, Check } from 'lucide-react'
 import { useMoodStore } from '@/store/moodStore'
 import { MOOD_EMOJIS } from '@/types'
 import { useTaskStore } from '@/store/taskStore'
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
 
 export function WellnessSuggestions() {
@@ -60,10 +60,7 @@ export function WellnessSuggestions() {
   if (suggestions.length === 0) return null
 
   const handleAdd = async (taskString: string, idx: number) => {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    const supabase = createClient()
     
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return

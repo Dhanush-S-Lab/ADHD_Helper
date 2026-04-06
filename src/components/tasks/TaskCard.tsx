@@ -4,7 +4,7 @@ import { Check, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
 import { Task, XP_REWARDS } from '@/types'
 import { useTaskStore } from '@/store/taskStore'
 import { useUserStore } from '@/store/userStore'
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -22,10 +22,7 @@ export function TaskCard({ task }: TaskCardProps) {
   const { addXP } = useUserStore()
   const playSound = useSoundEffect()
   
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const supabase = createClient()
 
   const isActive = activeTask?.id === task.id
 
